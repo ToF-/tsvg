@@ -33,5 +33,11 @@
 (define-test initially-trail-is-empty
              (assert-equal t (null (trail (new-turtle)))))
 
+(define-test after-one-move-with-pen-down-trail-is-not-empty
+             (let ((t-turtle (move 100.0 (pen-down (new-turtle)))))
+               (assert-equal 
+                 '((100.0 0.0) (0.0 0.0))
+                 (car (trail t-turtle)))))
+
 (run-tests :all)
 (sb-ext:quit)

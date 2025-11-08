@@ -22,7 +22,19 @@
   (cadddr turtle))
 
 (defun pen-down (turtle)
-  (cons t (cdr turtle)))
+  (let ((pen (pen turtle))
+        (coords (coords turtle))
+        (heading (heading turtle))
+        (trail (trail turtle)))
+    (if pen
+      turtle
+      (make-turtle
+        t
+        coords
+        heading
+        (cons
+          (cons coords ())
+          trail)))))
 
 (defun pen-up (turtle)
   (cons nil (cdr turtle)))
@@ -47,7 +59,17 @@
         (coords (coords turtle))
         (heading (heading turtle))
         (trail (trail turtle)))
-    (make-turtle pen (move distance coords heading) heading trail)))
+    (if pen
+      (make-turtle
+        pen
+        (move distance coords heading)
+        heading
+        (cons (cons coords (car trail)) (cdr trail)))
+      (make-turtle
+        pen
+        (move distance coords heading)
+        heading
+        trail))))
 
 (defun right (angle turtle)
   (let ((pen (pen turtle))
@@ -62,3 +84,4 @@
         (heading (caddr turtle))
         (trail (cadddr turtle)))
     (make-turtle pen coords (+ heading angle) trail)))
+
