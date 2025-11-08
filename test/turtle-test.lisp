@@ -30,5 +30,8 @@
              (let ((r-turtle (left 45.0 (new-turtle))))
                (assert-float-equal 45.0 (heading r-turtle))))
 
+(define-test initially-trail-is-empty
+             (assert-equal t (null (trail (new-turtle)))))
+
 (run-tests :all)
 (sb-ext:quit)

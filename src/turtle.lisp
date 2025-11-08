@@ -1,10 +1,13 @@
 ; a turtle is 4 state: pen (up or down), coords (x,y) and heading (in degrees)
 
-(defun make-turtle (pen coords heading)
-  (cons pen (cons coords (cons heading ()))))
+(defun make-turtle (pen coords heading trail)
+  (cons pen (cons coords (cons heading (cons trail ())))))
 
 (defun new-turtle ()
-  (make-turtle nil (quote (0.0 0.0)) 0.0))
+  (make-turtle nil (quote (0.0 0.0)) 0.0 ()))
+
+(defun pen (turtle)
+  (car turtle))
 
 (defun coords (turtle)
   (cadr turtle))
@@ -14,6 +17,9 @@
 
 (defun heading (turtle)
     (caddr turtle))
+
+(defun trail (turtle)
+  (cadddr turtle))
 
 (defun pen-down (turtle)
   (cons t (cdr turtle)))
@@ -37,19 +43,22 @@
         ()))))
 
 (defun forward (distance turtle)
-  (let ((pen (car turtle))
-        (coords (cadr turtle))
-        (heading (caddr turtle)))
-    (make-turtle pen (move distance coords heading) heading)))
+  (let ((pen (pen turtle))
+        (coords (coords turtle))
+        (heading (heading turtle))
+        (trail (trail turtle)))
+    (make-turtle pen (move distance coords heading) heading trail)))
 
 (defun right (angle turtle)
-  (let ((pen (car turtle))
-        (coords (cadr turtle))
-        (heading (caddr turtle)))
-    (make-turtle pen coords (- heading angle))))
+  (let ((pen (pen turtle))
+        (coords (coords turtle))
+        (heading (heading turtle))
+        (trail (trail turtle)))
+    (make-turtle pen coords (- heading angle) trail)))
 
 (defun left (angle turtle)
   (let ((pen (car turtle))
         (coords (cadr turtle))
-        (heading (caddr turtle)))
-    (make-turtle pen coords (+ heading angle))))
+        (heading (caddr turtle))
+        (trail (cadddr turtle)))
+    (make-turtle pen coords (+ heading angle) trail)))
