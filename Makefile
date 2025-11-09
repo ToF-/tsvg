@@ -4,4 +4,4 @@ first: src/first.lisp
 	cat a.svg
 
 tests: test/turtle-test.lisp src/turtle.lisp
-	sbcl --load ~/.sbclrc --script test/turtle-test.lisp
+	sbcl --load ~/.sbclrc --script test/all-tests.lisp

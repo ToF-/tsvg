@@ -85,3 +85,5 @@
         (trail (cadddr turtle)))
     (make-turtle pen coords (+ head angle) trail)))
 
+(defun lines (turtle)
+  (reverse (mapcar #'reverse (trail turtle))))

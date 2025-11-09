@@ -41,20 +41,23 @@
                  (trail f-turtle))))
 
 (define-test pen-down-starts-a-new-line-in-trail
-             (let ((f-turtle
-                     (up
-                       (forward 100
-                                (down
-                                  (forward 50
-                                           (up
-                                             (forward 200
-                                                      (down (new-turtle))))))))))
+             (let ((f-turtle 
+                     (up (forward 100 (down (forward 50 
+                                                     (up (forward 200 (down (new-turtle))))))))))
                (assert-equal
                  '(
-                    ((350.0d0 0.0d0) (250.0d0 0.0d0))
-                    ((200.0d0 0.0d0) (0.0 0.0))
-                    )
+                   ((350.0d0 0.0d0) (250.0d0 0.0d0))
+                   ((200.0d0 0.0d0) (0.0 0.0))
+                   )
                  (trail f-turtle))))
 
-(run-tests :all)
-(sb-ext:quit)
+(define-test lines-yield-trail-in-order
+             (let ((f-turtle 
+                     (up (forward 100 (down (forward 50 
+                                                     (up (forward 200 (down (new-turtle))))))))))
+               (assert-equal
+                 '(
+                   ((0.0 0.0) (200.0d0 0.0d0))
+                   ((250.0d0 0.0d0) (350.0d0 0.0d0))
+                   )
+                 (lines f-turtle))))
