@@ -71,19 +71,27 @@
         head
         trail))))
 
+(defun backward (distance turtle)
+  (forward (- distance) turtle))
+
+(defun mod-360 (angle)
+  (cond ((< angle -360) (+ angle 360))
+        ((> angle 360) (- angle 360))
+        (t angle)))
+
 (defun right (angle turtle)
   (let ((pen (pen turtle))
         (coords (coords turtle))
         (head (head turtle))
         (trail (trail turtle)))
-    (make-turtle pen coords (- head angle) trail)))
+    (make-turtle pen coords (mod-360 (- head angle)) trail)))
 
 (defun left (angle turtle)
   (let ((pen (car turtle))
         (coords (cadr turtle))
         (head (caddr turtle))
         (trail (cadddr turtle)))
-    (make-turtle pen coords (+ head angle) trail)))
+    (make-turtle pen coords (mod-360 (+ head angle)) trail)))
 
 (defun lines (turtle)
   (reverse (mapcar #'reverse (trail turtle))))
