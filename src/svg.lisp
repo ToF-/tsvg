@@ -1,5 +1,5 @@
 (defun render-point (point)
-  (format nil "~A,~A" (car point) (cadr point)))
+  (format nil "~5,2F, ~5,2F" (car point) (cadr point)))
 
 (defun intersperse-strings (items)
   (cond
@@ -14,7 +14,7 @@
   (concatenate 'string
                "<polyline points=\""
                (intersperse-strings (mapcar #'render-point points))
-               "\">"))
+               "\"/>"))
 
 (defun render-polylines (lines)
   (cond
@@ -25,6 +25,6 @@
 
 (defun render-svg (width height lines)
   (concatenate 'string
-               (format nil "svg height=\"~A\" width=\"~A\" xmlns=\"http://www.w3.org/2000/svg\">~%" height width)
+               (format nil "<svg height=\"~A\" width=\"~A\" xmlns=\"http://www.w3.org/2000/svg\">~%" height width)
                (render-polylines lines)
                "</svg>"))
