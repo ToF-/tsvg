@@ -98,7 +98,6 @@
       angle
       trail)))
 
-            
 (defun backward (distance turtle)
   (forward (- distance) turtle))
 

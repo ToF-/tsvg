@@ -6,8 +6,7 @@
 (defparameter angle 90)
 
 (defun apply-rules (instruction)
-    (cond ((eq 'X instruction) '(M Y F P X F X P F Y M))
-          ((eq 'Y instruction) '(P X F M Y F Y M F X P))
+    (cond ((eq 'F instruction) '(F P F M F M F P F P F M))
           (t (list instruction))))
 
 (defun process-instructions (instructions)
@@ -30,13 +29,13 @@
         (t (process (cdr instructions) turtle))))
 
 
-(defun hilbert ()
+(defun simple ()
   (let ((f-turtle
           (process
-            (l-system 7 '(X))
-            (down (new-turtle)))))
+            (l-system 4 '(F P F P F P F))
+            (down (goto '(30 -55) (new-turtle))))))
     (format t
             (render-svg 1000 1000 (calibrate (lines f-turtle))))))
 
-(hilbert)
+(simple)
 (sb-ext:quit)
