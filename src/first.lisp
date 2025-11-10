@@ -1,4 +1,8 @@
 (load "src/turtle")
+
+(defun triangle ()
+  (let ((f-turtle
+          (new-turtle)
 (defun render (width height)
   (progn
     (format t

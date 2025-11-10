@@ -61,3 +61,26 @@
                    ((250.0d0 0.0d0) (350.0d0 0.0d0))
                    )
                  (lines f-turtle))))
+
+(define-test executing-commands
+             (let ((f-turtle
+                     (execute '(
+                                (GOTO (100 100))
+                                (DOWN)
+                                (FORWARD 50)
+                                (RIGHT 90)
+                                (FORWARD 25)
+                                (LEFT 45)
+                                (FORWARD 75)
+                                (UP)
+                                (GOTO (0 0))
+                                (DOWN)
+                                (TURN 100)
+                                (FORWARD 100)
+                                (UP))
+                              (new-turtle))))
+               (assert-equal
+                 '(((100 100) (150.0d0 100.0d0) (150.0d0 75.0d0)
+                              (203.03300858899107d0 21.96699141100894d0))
+                   ((0 0) (-17.36481776669303d0 98.4807753012208d0)))
+                 (lines f-turtle))))

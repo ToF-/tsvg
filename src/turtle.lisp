@@ -54,6 +54,23 @@
         (+ y (* distance (sin (/ (* head pi) 180.0))))
         ()))))
 
+(defun goto (target turtle)
+  (let ((pen (pen turtle))
+        (coords (coords turtle))
+        (head (head turtle))
+        (trail (trail turtle)))
+    (if pen
+      (make-turtle
+        pen
+        target
+        head
+        (cons (cons coords (car trail)) (cdr trail)))
+      (make-turtle
+        pen
+        target
+        head
+        trail))))
+
 (defun forward (distance turtle)
   (let ((pen (pen turtle))
         (coords (coords turtle))
@@ -71,6 +88,17 @@
         head
         trail))))
 
+(defun turn (angle turtle)
+  (let ((pen (pen turtle))
+        (coords (coords turtle))
+        (trail (trail turtle)))
+    (make-turtle
+      pen
+      coords
+      angle
+      trail)))
+
+            
 (defun backward (distance turtle)
   (forward (- distance) turtle))
 
@@ -95,3 +123,24 @@
 
 (defun lines (turtle)
   (reverse (mapcar #'reverse (trail turtle))))
+
+(defun execute (instructions turtle)
+  (cond
+    ((null instructions) turtle)
+    (t (let* ((instruction (car instructions))
+              (command (car instruction))
+              (param (cadr instruction))
+              (next-turtle
+                (cond
+                  ((eq 'UP command) (up turtle))
+                  ((eq 'DOWN command) (down turtle))
+                  ((eq 'GOTO command) (goto param turtle))
+                  ((eq 'TURN command) (turn param turtle))
+                  ((eq 'FORWARD command) (forward param turtle))
+                  ((eq 'BACKWARD command) (backward param turtle))
+                  ((eq 'RIGHT command) (right param turtle))
+                  ((eq 'LEFT command) (left param turtle))
+                  (t turtle))))
+         (execute (cdr instructions) next-turtle)))))
+
+
