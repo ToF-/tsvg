@@ -61,9 +61,26 @@
          (off-coords (cons (- min-x) (cons (- min-y) ()))))
     (translate-lines off-coords lines)))
 
+(defun reverse-y-coord (height coord)
+  (let ((x (car coord))
+        (y (cadr coord)))
+    (cons x (cons (- height y) ()))))
+
+(defun reverse-y-line (height line)
+  (if (null line)
+    ()
+    (cons (reverse-y-coord height (car line))
+          (reverse-y-line height (cdr line)))))
+
+(defun reverse-y (height lines)
+  (if (null lines)
+    ()
+    (cons (reverse-y-line height (car lines))
+          (reverse-y height (cdr lines)))))
+
 (defun render-svg (width height lines)
   (concatenate 'string
                (format nil "<svg height=\"~A\" width=\"~A\" xmlns=\"http://www.w3.org/2000/svg\">~%" height width)
-               (render-polylines (calibrate lines))
+               (render-polylines (reverse-y height (calibrate lines)))
                "</svg>"))
 

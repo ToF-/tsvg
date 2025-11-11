@@ -1,5 +1,5 @@
 <svg height="1000" width="1000" xmlns="http://www.w3.org/2000/svg">
-<polyline points=" 0.00, 400.00 400.00, 400.00 400.00,  0.00  0.00,  0.00  0.00, 400.00" style="stroke:black; fill:none" />
-<polyline points=" 0.00, 400.00 400.00, 400.00" style="stroke:black; fill:none" />
-<polyline points=" 0.00, 400.00 100.00, 226.79 400.00, 400.00" style="stroke:black; fill:none" />
+<polyline points=" 0.00, 600.00 400.00, 600.00 400.00, 1000.00  0.00, 1000.00  0.00, 600.00" style="stroke:black; fill:none" />
+<polyline points=" 0.00, 600.00 400.00, 600.00" style="stroke:black; fill:none" />
+<polyline points=" 0.00, 600.00 200.00, 400.00 400.00, 600.00" style="stroke:black; fill:none" />
 </svg>

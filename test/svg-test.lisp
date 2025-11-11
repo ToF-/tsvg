@@ -15,10 +15,8 @@
                (assert-equal
                  (format nil "~A~%~A~%~A~%~A" 
                          "<svg height=\"400\" width=\"500\" xmlns=\"http://www.w3.org/2000/svg\">"
-
-                         "<polyline points=\" 0.00,  0.00 25.00, 125.00 75.00, 50.00 125.00, 25.00 175.00, 115.00 225.00, 115.00\" style=\"stroke:black; fill:none\" />"
-                         "<polyline points=\" 0.00, 75.00 25.00, 225.00 75.00, 150.00 125.00, 125.00 175.00, 215.00 225.00, 215.00\" style=\"stroke:black; fill:none\" />"
-
+"<polyline points=\" 0.00, 400.00 25.00, 275.00 75.00, 350.00 125.00, 375.00 175.00, 285.00 225.00, 285.00\" style=\"stroke:black; fill:none\" />"
+"<polyline points=\" 0.00, 325.00 25.00, 175.00 75.00, 250.00 125.00, 275.00 175.00, 185.00 225.00, 185.00\" style=\"stroke:black; fill:none\" />"
                          "</svg>")
                  (render-svg 500 400 lines))))
 
