@@ -155,3 +155,8 @@
              (FORWARD 15)
              (LEFT 90)
              (UP)) turtle))
+
+(defun n-times (n f turtle)
+  (if (= 0 n)
+    turtle
+    (n-times (- n 1) f (funcall f turtle))))

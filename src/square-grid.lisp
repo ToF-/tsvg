@@ -31,23 +31,28 @@
              (forward ,(* size (sqrt 2)))
              (up)
              (right 45)) turtle))
-             
 
-(defun n-times (n f turtle)
-  (if (eq 0 n)
-    turtle
-    (n-times (- n 1) f (apply f turtle))))
+(defun next-col (size turtle)
+  (execute `((backward ,size)
+             (right 90)
+             (forward ,(/ size 16))
+             (left 90)) turtle))
+
 
 (defun square-grid (size)
-  (let ((f-turtle
-          (turtle-symbol
-            (n-times
-              16 
-              (lambda (x)
-                (cross 
-                  (/ size 16)
-                  (square (/ size 16) x)))
-              (new-turtle)))))
+  (let* ((section (/ size 16.0))
+         (f-turtle
+           (n-times
+             16
+             (lambda (turtle)
+               (next-col size
+                         (n-times
+                           16 
+                           (lambda (turtle)
+                             (cross section
+                                    (square section turtle)))
+                           turtle)))
+             (new-turtle))))
     (format t
             (render-svg 500 500 (lines f-turtle)))))
 

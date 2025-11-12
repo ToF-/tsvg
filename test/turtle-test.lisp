@@ -84,3 +84,9 @@
                               (203.03300858899107d0 21.96699141100894d0))
                    ((0 0) (-17.36481776669303d0 98.4807753012208d0)))
                  (lines f-turtle))))
+
+(define-test loop-command
+             (let ((f-turtle
+                     (n-times 4 (lambda (turtle)
+                                  (forward 100 turtle)) (new-turtle))))
+               (assert-float-equal 400.0 (x f-turtle))))
