@@ -142,4 +142,16 @@
                   (t turtle))))
          (execute (cdr instructions) next-turtle)))))
 
-
+(defun turtle-symbol (turtle)
+  (execute `((UP)
+             (LEFT 90)
+             (DOWN)
+             (FORWARD 15)
+             (RIGHT 135)
+             (FORWARD ,(* 15 (sqrt 2.0)))
+             (RIGHT 90)
+             (FORWARD ,(* 15 (sqrt 2.0)))
+             (RIGHT 135)
+             (FORWARD 15)
+             (LEFT 90)
+             (UP)) turtle))
