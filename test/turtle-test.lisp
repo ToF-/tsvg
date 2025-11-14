@@ -85,8 +85,32 @@
                    ((0 0) (-17.36481776669303d0 98.4807753012208d0)))
                  (lines f-turtle))))
 
+(define-test executing-run-command
+             (let ((f-turtle
+                     (execute `(
+                                (RUN ,(lambda (turtle)
+                                        (goto '(10 10) turtle)))
+                                )
+                              (new-turtle))))
+               (assert-equal 10 (x f-turtle))))
+
 (define-test loop-command
              (let ((f-turtle
                      (n-times 4 (lambda (turtle)
                                   (forward 100 turtle)) (new-turtle))))
                (assert-float-equal 400.0 (x f-turtle))))
+
+(define-test push-and-pop-state
+             (let ((f-turtle
+                     (execute '(
+                                (GOTO (4807 2317))
+                                (TURN 45)
+                                (PUSH-STATE)
+                                (GOTO (23 17))
+                                (TURN 128))
+                              (new-turtle))))
+               (assert-float-equal 23.0 (x f-turtle))
+               (assert-float-equal 17.0 (y f-turtle))
+               (assert-float-equal 128.0 (head f-turtle))))
+                                
+
