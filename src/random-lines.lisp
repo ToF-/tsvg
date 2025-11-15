@@ -10,7 +10,8 @@
   (if (eq 0 n)
     turtle
     (let* ((angle (random 360))
-           (dist (- (random 5) 25))
+           (factor (* 0.5 (+ (random 3) 1)))
+           (dist (* factor (- (random 5) 25)))
            (n-turtle (forward dist (turn angle turtle))))
       (cond
         ((< (x n-turtle) 0) (random-lines (- n 1) turtle))
@@ -23,7 +24,7 @@
                                     (turn angle (down turtle))))))))))
 (defun main ()
   (let ((f-turtle
-          (random-lines 20000
+          (random-lines 1000000
                         (goto '(750.0 750.0)
                               (new-turtle)))))
     (format t
